@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  fphttpclient, fpjson, jsonparser, opensslsockets;
+  ComCtrls, fphttpclient, fpjson, jsonparser, opensslsockets, ShellApi;
 
 type
 
@@ -15,9 +15,10 @@ type
   TfrmMain = class(TForm)
     Button1: TButton;
     Button3: TButton;
-    editURL: TEdit;
     edtCity: TEdit;
     Image1: TImage;
+    ImageList2: TImageList;
+    imgDayNight: TImage;
     ImageList1: TImageList;
     imgRose: TImage;
     Label1: TLabel;
@@ -33,19 +34,18 @@ type
     Label2: TLabel;
     Label20: TLabel;
     Label21: TLabel;
-    Label22: TLabel;
     Label23: TLabel;
     Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     memoJoke: TMemo;
+    StatusBar1: TStatusBar;
     stFeelsLike: TStaticText;
     stUV: TStaticText;
     stVisibility: TStaticText;
@@ -55,7 +55,6 @@ type
     stWeatherCode: TStaticText;
     stTimeZone: TStaticText;
     stRegion: TStaticText;
-    stCountry2: TStaticText;
     stTemperature: TStaticText;
     stLocation: TStaticText;
     stCountry: TStaticText;
@@ -74,8 +73,11 @@ type
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgRoseClick(Sender: TObject);
+    procedure Label13Click(Sender: TObject);
   private
     procedure OrientateRose(direction: string);
+    procedure SetDayNight(daynight: string);
+    procedure GetJoke;
   public
 
   end;
@@ -88,8 +90,7 @@ implementation
 {$R *.lfm}
 
 { TfrmMain }
-
-procedure TfrmMain.Button1Click(Sender: TObject);
+procedure TfrmMain.GetJoke;
 var
   client: TFPHTTPClient;
   response: string;
@@ -98,6 +99,9 @@ var
   jokeField: TJSONString;
   jokeVariant: variant;
 begin
+
+  StatusBar1.Panels[0].Text := 'Getting a joke....';
+  Application.ProcessMessages;
 
   // Get A Chuck Norris joke
   client := TFPHTTPClient.Create(nil);
@@ -118,6 +122,11 @@ begin
   finally
     client.Free;
   end;
+end;
+
+procedure TfrmMain.Button1Click(Sender: TObject);
+begin
+  GetJoke;
 end;
 
 //procedure TfrmMain.Button2Click(Sender: TObject);
@@ -148,12 +157,18 @@ var
   ImageStream: TMemoryStream;
   I: integer;
 begin
+
   if edtCity.Text = '' then
   begin
     ShowMessage('Please enter a city!');
     edtCity.SetFocus;
     exit;
   end;
+  // Always get a joke
+  GetJoke;
+  StatusBar1.Panels[0].Text := 'Getting weather data';
+  Application.ProcessMessages;
+
   Client := TFPHTTPClient.Create(nil);
   URL := 'http://api.weatherstack.com/current?access_key=e20d123e786d2dc17186b881fdf67186&query='
     + edtCity.Text;
@@ -196,14 +211,19 @@ begin
       stUV.Caption := JSONData.FindPath('current.uv_index').AsInteger.ToString;
       stVisibility.Caption := JSONData.FindPath('current.visibility').AsInteger.ToString;
       stIsDay.Caption := JSONData.FindPath('current.is_day').AsString;
+      SetDayNight(JSONData.FindPath('current.is_day').AsString);
+
+
       // Here we retrieve the URL to the weather Icon
       WeatherIconURL := JSONData.FindPath('current.weather_icons[0]').AsString;
     finally
       JSONData.Free;
+      StatusBar1.Panels[0].Text := 'Ready';
     end;
   except
     on E: Exception do
       ShowMessage(E.Message);
+
   end;
 
   // Load the weather picture into a TMemoryStream
@@ -244,6 +264,29 @@ begin
 
 end;
 
+procedure TfrmMain.Label13Click(Sender: TObject);
+begin
+  // Open the weather code file
+  ShellExecute(0, 'open', PChar('.\wcodes.ods'),'','',5);
+end;
+
+procedure TfrmMain.SetDayNight(daynight: string);
+var
+  index: integer;
+  bmp: TBitMap;
+begin
+  case daynight of
+    'yes': index := 0;
+    'no': index := 1;
+  end;
+  bmp := TBitMap.Create;
+  try
+    ImageList2.GetBitmap(index, bmp);
+    imgDayNight.Picture.Assign(bmp);
+  finally
+  end;
+end;
+
 procedure TfrmMain.OrientateRose(direction: string);
 var
   index: integer;
@@ -257,7 +300,7 @@ begin
     'S': index := 4;
     'WSW': index := 5;
     'W': index := 6;
-    'WNW': index := 7;
+    'NNW': index := 7;
   end;
   bmp := TBitMap.Create;
   try
