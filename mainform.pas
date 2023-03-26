@@ -83,6 +83,8 @@ type
     procedure imgBtnCloseMouseLeave(Sender: TObject);
     procedure imgBtnCloseMouseMove(Sender: TObject; Shift: TShiftState;
       X, Y: integer);
+    procedure imgBtnCloseMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure Label13Click(Sender: TObject);
     procedure Panel1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -331,6 +333,12 @@ begin
     bmp.Free;
   end;
 
+end;
+
+procedure TfrmMain.imgBtnCloseMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Close;
 end;
 
 procedure TfrmMain.Label13Click(Sender: TObject);
