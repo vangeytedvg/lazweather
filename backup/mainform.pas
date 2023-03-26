@@ -15,11 +15,12 @@ type
 
   TfrmMain = class(TForm)
     Button1: TButton;
-    Button2: TButton;
     Button3: TButton;
     edtCity: TEdit;
     Image1: TImage;
+    imgBtnClose: TImage;
     ImageList2: TImageList;
+    formbar: TImageList;
     imgDayNight: TImage;
     ImageList1: TImageList;
     imgDayNight1: TImage;
@@ -77,9 +78,14 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure imgBtnCloseMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
+    procedure imgBtnCloseMouseLeave(Sender: TObject);
+    procedure imgBtnCloseMouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: integer);
     procedure Label13Click(Sender: TObject);
     procedure Panel1MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+      Shift: TShiftState; X, Y: integer);
   private
     procedure OrientateRose(direction: string);
     procedure SetDayNight(daynight: string);
@@ -266,12 +272,65 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
   bmp: Graphics.TBitmap;
 begin
-    bmp := Graphics.TBitMap.Create;
-    try
-      ImageList1.GetBitmap(0, bmp);
-      imgRose.Picture.Assign(bmp);
-    finally
-    end;
+  bmp := Graphics.TBitMap.Create;
+  try
+    ImageList1.GetBitmap(0, bmp);
+    imgRose.Picture.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
+  bmp := Graphics.TBitmap.Create;
+  try
+    formbar.GetBitmap(0, bmp);
+    imgBtnClose.Picture.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
+end;
+
+procedure TfrmMain.imgBtnCloseMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: integer);
+var
+  bmp: Graphics.TBitmap;
+begin
+  bmp := Graphics.TBitmap.Create;
+  try
+    formbar.GetBitmap(0, bmp);
+    imgBtnClose.Picture.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
+
+end;
+
+procedure TfrmMain.imgBtnCloseMouseLeave(Sender: TObject);
+var
+  bmp: Graphics.TBitmap;
+
+begin
+  bmp := Graphics.TBitmap.Create;
+  try
+    formbar.GetBitmap(0, bmp);
+    imgBtnClose.Picture.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
+
+end;
+
+procedure TfrmMain.imgBtnCloseMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: integer);
+var
+  bmp: Graphics.TBitmap;
+begin
+  bmp := Graphics.TBitmap.Create;
+  try
+    formbar.GetBitmap(1, bmp);
+    imgBtnClose.Picture.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
+
 end;
 
 procedure TfrmMain.Label13Click(Sender: TObject);
@@ -281,10 +340,10 @@ begin
 end;
 
 procedure TfrmMain.Panel1MouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+  Shift: TShiftState; X, Y: integer);
 begin
-     ReleaseCapture;
-     SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+  ReleaseCapture;
+  SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
 end;
 
 
