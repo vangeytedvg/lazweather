@@ -19,7 +19,8 @@ type
     editURL: TEdit;
     edtCity: TEdit;
     Image1: TImage;
-    Image2: TImage;
+    imgRose: TImage;
+    ImageList1: TImageList;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -74,10 +75,9 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Image2Click(Sender: TObject);
-    procedure stCountry2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-
+    procedure OrientateRose(direction: string);
   public
 
   end;
@@ -221,14 +221,22 @@ begin
   Client.Free;
 end;
 
-procedure TfrmMain.Image2Click(Sender: TObject);
+procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  bmp: TBitmap;
+begin
+  bmp := TBitMap.Create;
+  try
+     ImageList1.GetBitmap(0,bmp);
+     imgRose.Picture.Assign(bmp);
+  finally
+  end;
+end;
+
+procedure TfrmMain.OrientateRose(direction: string);
 begin
 
 end;
 
-procedure TfrmMain.stCountry2Click(Sender: TObject);
-begin
-
-end;
 
 end.

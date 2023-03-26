@@ -19,7 +19,8 @@ type
     editURL: TEdit;
     edtCity: TEdit;
     Image1: TImage;
-    Image2: TImage;
+    imgRose: TImage;
+    ImageList1: TImageList;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -74,10 +75,11 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Image2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure imgRoseClick(Sender: TObject);
     procedure stCountry2Click(Sender: TObject);
   private
-
+    procedure OrientateRose(direction: string);
   public
 
   end;
@@ -189,14 +191,15 @@ begin
       stFeelsLike.Caption := JSONData.FindPath('current.feelslike').AsInteger.ToString + ' °Celsius.';
       stUV.Caption := JSONData.FindPath('current.uv_index').AsInteger.ToString;
       stVisibility.Caption:=JSONData.FindPath('current.visibility').AsInteger.ToString;
-      stIsDay.Caption:=JSONData.FindPath('current.isday').AsString;
+      stIsDay.Caption:=JSONData.FindPath('current.is_day').AsString;
       // Here we retrieve the URL to the weather Icon
       WeatherIconURL := JSONData.FindPath('current.weather_icons[0]').AsString;
     finally
       JSONData.Free;
     end;
   except
-    ShowMessage('rrir');
+     on E: Exception do
+       ShowMessage(E.Message);
   end;
 
   // Load the weather picture into a TMemoryStream
@@ -220,14 +223,22 @@ begin
   Client.Free;
 end;
 
-procedure TfrmMain.Image2Click(Sender: TObject);
+procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  bmp: TBitmap;
+begin
+  bmp := TBitMap.Create;
+  try
+     ImageList1.GetBitmap(0,bmp);
+     imgRose.Picture.Assign(bmp);
+  finally
+  end;
+end;
+
+procedure TfrmMain.OrientateRose(direction: string);
 begin
 
 end;
 
-procedure TfrmMain.stCountry2Click(Sender: TObject);
-begin
-
-end;
 
 end.
