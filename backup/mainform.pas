@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ComCtrls, fphttpclient, fpjson, jsonparser, opensslsockets, ShellApi;
+  ComCtrls, Buttons, fphttpclient, fpjson, jsonparser, opensslsockets, ShellApi,
+  Windows;
 
 type
 
@@ -14,6 +15,7 @@ type
 
   TfrmMain = class(TForm)
     Button1: TButton;
+    Button2: TButton;
     Button3: TButton;
     edtCity: TEdit;
     Image1: TImage;
@@ -21,6 +23,7 @@ type
     imgDayNight: TImage;
     ImageList1: TImageList;
     imgDayNight1: TImage;
+    imgDayNight2: TImage;
     imgRose: TImage;
     Label1: TLabel;
     Label10: TLabel;
@@ -46,6 +49,7 @@ type
     Label8: TLabel;
     Label9: TLabel;
     memoJoke: TMemo;
+    Panel1: TPanel;
     StatusBar1: TStatusBar;
     stFeelsLike: TStaticText;
     stUV: TStaticText;
@@ -70,10 +74,12 @@ type
     stWindSpeed: TStaticText;
     stWindDegree: TStaticText;
     procedure Button1Click(Sender: TObject);
-
+    procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Label13Click(Sender: TObject);
+    procedure Panel1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     procedure OrientateRose(direction: string);
     procedure SetDayNight(daynight: string);
@@ -118,7 +124,6 @@ begin
       jokeField := TJSONString.Create(jokeVariant);
       memoJoke.Clear;
       memoJoke.Lines.Add(jokeField.Value);
-
     finally
       parser.Free;
     end;
@@ -130,6 +135,11 @@ end;
 procedure TfrmMain.Button1Click(Sender: TObject);
 begin
   GetJoke;
+end;
+
+procedure TfrmMain.Button2Click(Sender: TObject);
+begin
+  Close;
 end;
 
 //procedure TfrmMain.Button2Click(Sender: TObject);
@@ -228,8 +238,8 @@ begin
   except
     on E: Exception do
       ShowMessage(E.Message);
-      FormWeb.Close;
   end;
+  FormWeb.Close;
 
   // Load the weather picture into a TMemoryStream
   ImageStream := TMemoryStream.Create;
@@ -254,14 +264,14 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var
-  bmp: TBitmap;
+  bmp: Graphics.TBitmap;
 begin
-  bmp := TBitMap.Create;
-  try
-    ImageList1.GetBitmap(0, bmp);
-    imgRose.Picture.Assign(bmp);
-  finally
-  end;
+    bmp := Graphics.TBitMap.Create;
+    try
+      ImageList1.GetBitmap(0, bmp);
+      imgRose.Picture.Assign(bmp);
+    finally
+    end;
 end;
 
 procedure TfrmMain.Label13Click(Sender: TObject);
@@ -270,16 +280,24 @@ begin
   ShellExecute(0, 'open', PChar('.\wcodes.ods'), '', '', 5);
 end;
 
+procedure TfrmMain.Panel1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+     ReleaseCapture;
+     SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+end;
+
+
 procedure TfrmMain.SetDayNight(daynight: string);
 var
   index: integer;
-  bmp: TBitMap;
+  bmp: Graphics.TBitMap;
 begin
   case daynight of
     'yes': index := 0;
     'no': index := 1;
   end;
-  bmp := TBitMap.Create;
+  bmp := Graphics.TBitMap.Create;
   try
     ImageList2.GetBitmap(index, bmp);
     imgDayNight.Picture.Assign(bmp);
@@ -304,12 +322,12 @@ begin
     'NW': index := 7;
     'WNW': index := 7;
   end;
-  bmp := TBitMap.Create;
-  try
-    ImageList1.GetBitmap(index, bmp);
-    imgRose.Picture.Assign(bmp);
-  finally
-  end;
+  //bmp := TBitMap.Create;
+  //try
+  //  ImageList1.GetBitmap(index, bmp);
+  //  imgRose.Picture.Assign(bmp);
+  //finally
+  //end;
 end;
 
 

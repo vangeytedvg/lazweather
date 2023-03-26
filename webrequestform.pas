@@ -12,6 +12,7 @@ type
   { TFormWeb }
 
   TFormWeb = class(TForm)
+    Bevel1: TBevel;
     Image1: TImage;
     Label1: TLabel;
   private
