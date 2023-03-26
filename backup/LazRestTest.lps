@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="65"/>
       </Unit>
       <Unit>
         <Filename Value="mainform.pas"/>
@@ -21,9 +21,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="207"/>
-        <CursorPos Y="225"/>
-        <UsageCount Value="63"/>
+        <TopLine Value="208"/>
+        <CursorPos X="20" Y="231"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -33,20 +33,19 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="9"/>
       </Unit>
+      <Unit>
+        <Filename Value="webrequestform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormWeb"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="webRequestForm"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="151" Column="3" TopLine="132"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="153" TopLine="135"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="228" Column="5" TopLine="209"/>
-      </Position>
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="mainform.pas"/>
         <Caret Line="230" Column="5" TopLine="211"/>
@@ -154,6 +153,14 @@
       <Position>
         <Filename Value="mainform.pas"/>
         <Caret Line="272" Column="41" TopLine="251"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="260" TopLine="258"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="291" Column="59" TopLine="269"/>
       </Position>
     </JumpHistory>
     <RunParams>

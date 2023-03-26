@@ -20,6 +20,7 @@ type
     ImageList2: TImageList;
     imgDayNight: TImage;
     ImageList1: TImageList;
+    imgDayNight1: TImage;
     imgRose: TImage;
     Label1: TLabel;
     Label10: TLabel;
@@ -72,7 +73,6 @@ type
 
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure imgRoseClick(Sender: TObject);
     procedure Label13Click(Sender: TObject);
   private
     procedure OrientateRose(direction: string);
@@ -86,6 +86,9 @@ var
   frmMain: TfrmMain;
 
 implementation
+
+uses
+  webRequestForm;
 
 {$R *.lfm}
 
@@ -165,6 +168,7 @@ begin
     exit;
   end;
   // Always get a joke
+  FormWeb.Show;
   GetJoke;
   StatusBar1.Panels[0].Text := 'Getting weather data';
   Application.ProcessMessages;
@@ -219,11 +223,12 @@ begin
     finally
       JSONData.Free;
       StatusBar1.Panels[0].Text := 'Ready';
+      FormWeb.Close;
     end;
   except
     on E: Exception do
       ShowMessage(E.Message);
-
+      FormWeb.Close;
   end;
 
   // Load the weather picture into a TMemoryStream
@@ -259,15 +264,10 @@ begin
   end;
 end;
 
-procedure TfrmMain.imgRoseClick(Sender: TObject);
-begin
-
-end;
-
 procedure TfrmMain.Label13Click(Sender: TObject);
 begin
   // Open the weather code file
-  ShellExecute(0, 'open', PChar('.\wcodes.ods'),'','',5);
+  ShellExecute(0, 'open', PChar('.\wcodes.ods'), '', '', 5);
 end;
 
 procedure TfrmMain.SetDayNight(daynight: string);
@@ -299,8 +299,10 @@ begin
     'ESE': index := 3;
     'S': index := 4;
     'WSW': index := 5;
+    'SSW': index := 5;
     'W': index := 6;
-    'NNW': index := 7;
+    'NW': index := 7;
+    'WNW': index := 7;
   end;
   bmp := TBitMap.Create;
   try

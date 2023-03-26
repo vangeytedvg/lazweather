@@ -41,6 +41,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="webrequestform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormWeb"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="webRequestForm"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
