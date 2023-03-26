@@ -14,20 +14,18 @@ type
 
   TfrmMain = class(TForm)
     Button1: TButton;
-    Button2: TButton;
     Button3: TButton;
     editURL: TEdit;
     edtCity: TEdit;
     Image1: TImage;
-    imgRose: TImage;
     ImageList1: TImageList;
+    imgRose: TImage;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
@@ -47,8 +45,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    lbJokes: TListBox;
-    Log: TMemo;
+    memoJoke: TMemo;
     stFeelsLike: TStaticText;
     stUV: TStaticText;
     stVisibility: TStaticText;
@@ -73,9 +70,10 @@ type
     stWindSpeed: TStaticText;
     stWindDegree: TStaticText;
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure imgRoseClick(Sender: TObject);
   private
     procedure OrientateRose(direction: string);
   public
@@ -111,7 +109,8 @@ begin
       jsonObject := parser.Parse as TJSONObject;
       jokeVariant := jsonObject.Get('value');
       jokeField := TJSONString.Create(jokeVariant);
-      lbJokes.Items.Add(jokeField.Value);
+      memoJoke.Clear;
+      memoJoke.Lines.Add(jokeField.Value);
 
     finally
       parser.Free;
@@ -121,23 +120,23 @@ begin
   end;
 end;
 
-procedure TfrmMain.Button2Click(Sender: TObject);
-{ Code to get an Image from the internet }
-var
-  HTTPClient: TFPHTTPClient;
-  ImageStream: TMemoryStream;
-begin
-  HTTPClient := TFPHTTPClient.Create(nil);
-  ImageStream := TMemoryStream.Create;
-  try
-    HTTPClient.Get('https://www.steenland.nl/images/steenland-logo.png', ImageStream);
-    ImageStream.Position := 0;
-    Image1.Picture.LoadFromStream(ImageStream);
-  finally
-    HTTPClient.Free;
-    ImageStream.Free;
-  end;
-end;
+//procedure TfrmMain.Button2Click(Sender: TObject);
+//{ Code to get an Image from the internet }
+//var
+//  HTTPClient: TFPHTTPClient;
+//  ImageStream: TMemoryStream;
+//begin
+//  HTTPClient := TFPHTTPClient.Create(nil);
+//  ImageStream := TMemoryStream.Create;
+//  try
+//    HTTPClient.Get('https://www.steenland.nl/images/steenland-logo.png', ImageStream);
+//    ImageStream.Position := 0;
+//    Image1.Picture.LoadFromStream(ImageStream);
+//  finally
+//    HTTPClient.Free;
+//    ImageStream.Free;
+//  end;
+//end;
 
 procedure TfrmMain.Button3Click(Sender: TObject);
 var
@@ -149,13 +148,17 @@ var
   ImageStream: TMemoryStream;
   I: integer;
 begin
+  if edtCity.Text = '' then
+  begin
+    ShowMessage('Please enter a city!');
+    edtCity.SetFocus;
+    exit;
+  end;
   Client := TFPHTTPClient.Create(nil);
   URL := 'http://api.weatherstack.com/current?access_key=e20d123e786d2dc17186b881fdf67186&query='
     + edtCity.Text;
-  editURL.Text := URL;
+
   ResponseContent := Client.Get(URL);
-  for I := 0 to Client.ResponseHeaders.Count - 1 do
-    Log.Lines.Add(Client.ResponseHeaders[I]);
 
   JSONData := GetJSON(ResponseContent);
 
@@ -183,21 +186,24 @@ begin
       stWindDegree.Caption :=
         JSONData.FindPath('current.wind_degree').AsInteger.ToString;
       stWindDirection.Caption := JSONData.FindPath('current.wind_dir').AsString;
+      OrientateRose(JSONData.FindPath('current.wind_dir').AsString);
       stPressure.Caption := JSONData.FindPath('current.pressure').AsInteger.ToString;
       stPrecip.Caption := JSONData.FindPath('current.precip').AsFloat.ToString;
-      stHummidity.Caption := JSONData.FindPath('current.humidity').AsInteger.ToString + '%';
-      stFeelsLike.Caption := JSONData.FindPath('current.feelslike').AsInteger.ToString + ' °Celsius.';
+      stHummidity.Caption := JSONData.FindPath('current.humidity').AsInteger.ToString
+        + '%';
+      stFeelsLike.Caption := JSONData.FindPath('current.feelslike').AsInteger.ToString +
+        ' °Celsius.';
       stUV.Caption := JSONData.FindPath('current.uv_index').AsInteger.ToString;
-      stVisibility.Caption:=JSONData.FindPath('current.visibility').AsInteger.ToString;
-      stIsDay.Caption:=JSONData.FindPath('current.is_day').AsString;
+      stVisibility.Caption := JSONData.FindPath('current.visibility').AsInteger.ToString;
+      stIsDay.Caption := JSONData.FindPath('current.is_day').AsString;
       // Here we retrieve the URL to the weather Icon
       WeatherIconURL := JSONData.FindPath('current.weather_icons[0]').AsString;
     finally
       JSONData.Free;
     end;
   except
-     on E: Exception do
-       ShowMessage(E.Message);
+    on E: Exception do
+      ShowMessage(E.Message);
   end;
 
   // Load the weather picture into a TMemoryStream
@@ -227,15 +233,38 @@ var
 begin
   bmp := TBitMap.Create;
   try
-     ImageList1.GetBitmap(0,bmp);
-     imgRose.Picture.Assign(bmp);
+    ImageList1.GetBitmap(0, bmp);
+    imgRose.Picture.Assign(bmp);
   finally
   end;
 end;
 
-procedure TfrmMain.OrientateRose(direction: string);
+procedure TfrmMain.imgRoseClick(Sender: TObject);
 begin
 
+end;
+
+procedure TfrmMain.OrientateRose(direction: string);
+var
+  index: integer;
+  bmp: TBitmap;
+begin
+  case direction of
+    'N': index := 0;
+    'ENE': index := 1;
+    'E': index := 2;
+    'ESE': index := 3;
+    'S': index := 4;
+    'WSW': index := 5;
+    'W': index := 6;
+    'WNW': index := 7;
+  end;
+  bmp := TBitMap.Create;
+  try
+    ImageList1.GetBitmap(index, bmp);
+    imgRose.Picture.Assign(bmp);
+  finally
+  end;
 end;
 
 

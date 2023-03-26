@@ -1,11 +1,17 @@
 object frmMain: TfrmMain
-  Left = 438
-  Height = 682
-  Top = 132
-  Width = 1041
+  Left = 575
+  Height = 792
+  Top = 95
+  Width = 622
   Caption = 'REST Lazarus Project'
-  ClientHeight = 682
-  ClientWidth = 1041
+  ClientHeight = 792
+  ClientWidth = 622
+  Color = 11926269
+  Font.CharSet = ANSI_CHARSET
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
   OnCreate = FormCreate
   LCLVersion = '2.2.6.0'
   object Button1: TButton
@@ -17,404 +23,601 @@ object frmMain: TfrmMain
     OnClick = Button1Click
     TabOrder = 0
   end
-  object lbJokes: TListBox
-    Left = 17
-    Height = 122
-    Top = 48
-    Width = 1007
-    ItemHeight = 0
-    TabOrder = 1
-  end
-  object Button2: TButton
-    Left = 17
-    Height = 25
-    Top = 176
-    Width = 75
-    Caption = 'Get an Image'
-    OnClick = Button2Click
-    TabOrder = 2
-  end
-  object Image1: TImage
-    Left = 16
-    Height = 112
-    Top = 208
-    Width = 112
-  end
   object Button3: TButton
-    Left = 160
+    Left = 16
     Height = 25
     Top = 176
     Width = 144
     Caption = 'Get the weather'
     OnClick = Button3Click
-    TabOrder = 3
+    TabOrder = 1
   end
   object Label1: TLabel
-    Left = 168
-    Height = 15
+    Left = 24
+    Height = 17
     Top = 227
-    Width = 66
+    Width = 77
     Caption = 'Temperature'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
   object stTemperature: TStaticText
-    Left = 280
-    Height = 16
+    Left = 136
+    Height = 18
     Top = 227
+    Width = 9
+    AutoSize = True
+    Caption = '...'
+    TabOrder = 2
+  end
+  object Label2: TLabel
+    Left = 24
+    Height = 17
+    Top = 257
+    Width = 51
+    Caption = 'Location'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object stLocation: TStaticText
+    Left = 136
+    Height = 18
+    Top = 255
+    Width = 9
+    AutoSize = True
+    Caption = '...'
+    TabOrder = 3
+  end
+  object Label3: TLabel
+    Left = 24
+    Height = 17
+    Top = 283
+    Width = 50
+    Caption = 'Country'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object stCountry: TStaticText
+    Left = 136
+    Height = 18
+    Top = 283
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 4
   end
-  object Label2: TLabel
-    Left = 168
-    Height = 15
-    Top = 257
-    Width = 46
-    Caption = 'Location'
+  object Label4: TLabel
+    Left = 24
+    Height = 17
+    Top = 312
+    Width = 42
+    Caption = 'Region'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stLocation: TStaticText
-    Left = 280
-    Height = 16
-    Top = 255
+  object stRegion: TStaticText
+    Left = 136
+    Height = 18
+    Top = 312
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 5
   end
-  object Label3: TLabel
-    Left = 168
-    Height = 15
-    Top = 283
-    Width = 43
+  object Label5: TLabel
+    Left = 24
+    Height = 17
+    Top = 339
+    Width = 50
     Caption = 'Country'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stCountry: TStaticText
-    Left = 280
-    Height = 16
-    Top = 283
+  object stCountry2: TStaticText
+    Left = 136
+    Height = 18
+    Top = 339
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 6
   end
-  object Label4: TLabel
-    Left = 168
-    Height = 15
-    Top = 312
-    Width = 37
-    Caption = 'Region'
+  object Label6: TLabel
+    Left = 24
+    Height = 17
+    Top = 367
+    Width = 18
+    Caption = 'Lat'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stRegion: TStaticText
-    Left = 280
-    Height = 16
-    Top = 312
+  object stLat: TStaticText
+    Left = 136
+    Height = 18
+    Top = 367
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 7
   end
-  object Label5: TLabel
-    Left = 168
-    Height = 15
-    Top = 339
-    Width = 43
-    Caption = 'Country'
+  object Label7: TLabel
+    Left = 24
+    Height = 17
+    Top = 395
+    Width = 22
+    Caption = 'Lon'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stCountry2: TStaticText
-    Left = 280
-    Height = 16
-    Top = 339
+  object stLon: TStaticText
+    Left = 136
+    Height = 18
+    Top = 395
     Width = 9
     AutoSize = True
     Caption = '...'
-    OnClick = stCountry2Click
     TabOrder = 8
   end
-  object Label6: TLabel
-    Left = 168
-    Height = 15
-    Top = 367
-    Width = 16
-    Caption = 'Lat'
+  object Label8: TLabel
+    Left = 24
+    Height = 17
+    Top = 424
+    Width = 58
+    Caption = 'Timezone'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stLat: TStaticText
-    Left = 280
-    Height = 16
-    Top = 367
+  object stTimeZone: TStaticText
+    Left = 136
+    Height = 18
+    Top = 424
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 9
   end
-  object Label7: TLabel
-    Left = 168
-    Height = 15
-    Top = 395
-    Width = 20
-    Caption = 'Lon'
-    ParentColor = False
-  end
-  object stLon: TStaticText
-    Left = 280
-    Height = 16
-    Top = 395
-    Width = 9
-    AutoSize = True
-    Caption = '...'
-    TabOrder = 10
-  end
-  object Label8: TLabel
-    Left = 168
-    Height = 15
-    Top = 424
-    Width = 51
-    Caption = 'Timezone'
-    ParentColor = False
-  end
-  object stTimeZone: TStaticText
-    Left = 280
-    Height = 16
-    Top = 424
-    Width = 9
-    AutoSize = True
-    Caption = '...'
-    TabOrder = 11
-  end
   object Label9: TLabel
-    Left = 328
-    Height = 15
+    Left = 184
+    Height = 17
     Top = 178
     Width = 21
     Caption = 'City'
     ParentColor = False
   end
   object edtCity: TEdit
-    Left = 360
-    Height = 23
+    Left = 216
+    Height = 25
     Top = 176
     Width = 248
-    TabOrder = 12
+    TabOrder = 10
     Text = 'Geraardsbergen'
   end
   object Label10: TLabel
-    Left = 168
-    Height = 15
+    Left = 24
+    Height = 17
     Top = 452
-    Width = 57
+    Width = 62
     Caption = 'Local Time'
     ParentColor = False
   end
   object stLocationTime: TStaticText
-    Left = 280
-    Height = 16
+    Left = 136
+    Height = 18
     Top = 452
+    Width = 9
+    AutoSize = True
+    Caption = '...'
+    TabOrder = 11
+  end
+  object Label11: TLabel
+    Left = 24
+    Height = 17
+    Top = 480
+    Width = 63
+    Caption = 'UTC Offset'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object stUTCOffset: TStaticText
+    Left = 136
+    Height = 18
+    Top = 480
+    Width = 9
+    AutoSize = True
+    Caption = '...'
+    TabOrder = 12
+  end
+  object Label12: TLabel
+    Left = 24
+    Height = 17
+    Top = 508
+    Width = 108
+    Caption = 'Observation Time'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object stObsTime: TStaticText
+    Left = 136
+    Height = 18
+    Top = 508
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 13
   end
-  object Label11: TLabel
-    Left = 168
-    Height = 15
-    Top = 480
-    Width = 56
-    Caption = 'UTC Offset'
+  object Label13: TLabel
+    Left = 368
+    Height = 17
+    Top = 224
+    Width = 87
+    Caption = 'Weather Code'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stUTCOffset: TStaticText
-    Left = 280
-    Height = 16
-    Top = 480
+  object stWeatherCode: TStaticText
+    Left = 480
+    Height = 18
+    Top = 224
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 14
   end
-  object Label12: TLabel
-    Left = 168
-    Height = 15
-    Top = 508
-    Width = 93
-    Caption = 'Observation Time'
+  object Label14: TLabel
+    Left = 368
+    Height = 17
+    Top = 254
+    Width = 68
+    Caption = 'Description'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stObsTime: TStaticText
-    Left = 280
-    Height = 16
-    Top = 508
+  object stWeatherDescription: TStaticText
+    Left = 480
+    Height = 18
+    Top = 254
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 15
   end
-  object Label13: TLabel
-    Left = 416
-    Height = 15
-    Top = 225
-    Width = 75
-    Caption = 'Weather Code'
+  object Label16: TLabel
+    Left = 368
+    Height = 17
+    Top = 282
+    Width = 73
+    Caption = 'Wind Speed'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stWeatherCode: TStaticText
-    Left = 528
-    Height = 16
-    Top = 225
+  object stWindSpeed: TStaticText
+    Left = 480
+    Height = 18
+    Top = 282
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 16
   end
-  object Label14: TLabel
-    Left = 416
-    Height = 15
-    Top = 255
-    Width = 60
-    Caption = 'Description'
+  object Label17: TLabel
+    Left = 368
+    Height = 17
+    Top = 310
+    Width = 79
+    Caption = 'Wind Degree'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stWeatherDescription: TStaticText
-    Left = 528
-    Height = 16
-    Top = 255
+  object stWindDegree: TStaticText
+    Left = 480
+    Height = 18
+    Top = 310
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 17
   end
-  object editURL: TEdit
-    Left = 168
-    Height = 23
-    Top = 632
-    Width = 816
+  object Label18: TLabel
+    Left = 368
+    Height = 17
+    Top = 338
+    Width = 90
+    Caption = 'Wind Direction'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object stWindDirection: TStaticText
+    Left = 480
+    Height = 18
+    Top = 338
+    Width = 9
+    AutoSize = True
+    Caption = '...'
     TabOrder = 18
   end
-  object Log: TMemo
-    Left = 631
-    Height = 227
-    Top = 227
-    Width = 393
+  object Label19: TLabel
+    Left = 368
+    Height = 17
+    Top = 366
+    Width = 52
+    Caption = 'Pressure'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object stPressure: TStaticText
+    Left = 480
+    Height = 18
+    Top = 366
+    Width = 9
+    AutoSize = True
+    Caption = '...'
     TabOrder = 19
   end
-  object Label15: TLabel
-    Left = 632
-    Height = 15
-    Top = 208
-    Width = 61
-    Caption = 'Header Log'
+  object Label20: TLabel
+    Left = 368
+    Height = 17
+    Top = 391
+    Width = 76
+    Caption = 'Precipitation'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object Label16: TLabel
-    Left = 416
-    Height = 15
-    Top = 283
-    Width = 63
-    Caption = 'Wind Speed'
-    ParentColor = False
-  end
-  object stWindSpeed: TStaticText
-    Left = 528
-    Height = 16
-    Top = 283
+  object stPrecip: TStaticText
+    Left = 480
+    Height = 18
+    Top = 391
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 20
   end
-  object Label17: TLabel
-    Left = 416
-    Height = 15
-    Top = 311
-    Width = 68
-    Caption = 'Wind Degree'
+  object Label21: TLabel
+    Left = 368
+    Height = 17
+    Top = 415
+    Width = 56
+    Caption = 'Humidity'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stWindDegree: TStaticText
-    Left = 528
-    Height = 16
-    Top = 311
+  object stHummidity: TStaticText
+    Left = 480
+    Height = 18
+    Top = 415
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 21
   end
-  object Label18: TLabel
-    Left = 416
-    Height = 15
-    Top = 339
-    Width = 79
-    Caption = 'Wind Direction'
+  object Label23: TLabel
+    Left = 368
+    Height = 17
+    Top = 439
+    Width = 54
+    Caption = 'Feels like'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stWindDirection: TStaticText
-    Left = 528
-    Height = 16
-    Top = 339
+  object stFeelsLike: TStaticText
+    Left = 480
+    Height = 18
+    Top = 439
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 22
   end
-  object Label19: TLabel
-    Left = 416
-    Height = 15
-    Top = 367
-    Width = 44
-    Caption = 'Pressure'
+  object Label24: TLabel
+    Left = 368
+    Height = 17
+    Top = 463
+    Width = 55
+    Caption = 'UV Index'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stPressure: TStaticText
-    Left = 528
-    Height = 16
-    Top = 367
+  object stUV: TStaticText
+    Left = 480
+    Height = 18
+    Top = 463
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 23
   end
-  object Label20: TLabel
-    Left = 416
-    Height = 15
-    Top = 392
-    Width = 67
-    Caption = 'Precipitation'
+  object Label25: TLabel
+    Left = 368
+    Height = 17
+    Top = 487
+    Width = 49
+    Caption = 'Visibility'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stPrecip: TStaticText
-    Left = 528
-    Height = 16
-    Top = 392
+  object stVisibility: TStaticText
+    Left = 480
+    Height = 18
+    Top = 487
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 24
   end
-  object Label21: TLabel
-    Left = 416
-    Height = 15
-    Top = 416
-    Width = 50
-    Caption = 'Humidity'
+  object Label26: TLabel
+    Left = 368
+    Height = 17
+    Top = 515
+    Width = 37
+    Caption = 'Is Day'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
-  object stHummidity: TStaticText
-    Left = 528
-    Height = 16
-    Top = 416
+  object stIsDay: TStaticText
+    Left = 480
+    Height = 18
+    Top = 515
     Width = 9
     AutoSize = True
     Caption = '...'
     TabOrder = 25
   end
+  object Image1: TImage
+    Left = 192
+    Height = 67
+    Top = 552
+    Width = 72
+  end
+  object Label22: TLabel
+    Left = 24
+    Height = 17
+    Top = 736
+    Width = 66
+    Caption = 'Debug URL'
+    ParentColor = False
+  end
+  object editURL: TEdit
+    Left = 24
+    Height = 25
+    Top = 752
+    Width = 552
+    TabOrder = 26
+  end
   object imgRose: TImage
-    Left = 632
+    Left = 24
     Height = 150
-    Top = 472
+    Top = 552
     Width = 150
     AutoSize = True
     OnClick = imgRoseClick
@@ -1854,87 +2057,19 @@ object frmMain: TfrmMain
       1189484422328BE57F0161C7F0339C16622A0000000049454E44AE426082
     }
   end
-  object Label22: TLabel
-    Left = 168
-    Height = 15
-    Top = 616
-    Width = 59
-    Caption = 'Debug URL'
-    ParentColor = False
-  end
-  object Label23: TLabel
-    Left = 416
-    Height = 15
-    Top = 440
-    Width = 47
-    Caption = 'Feels like'
-    ParentColor = False
-  end
-  object stFeelsLike: TStaticText
-    Left = 528
-    Height = 16
-    Top = 440
-    Width = 9
-    AutoSize = True
-    Caption = '...'
-    TabOrder = 26
-  end
-  object Label24: TLabel
-    Left = 416
-    Height = 15
-    Top = 464
-    Width = 47
-    Caption = 'UV Index'
-    ParentColor = False
-  end
-  object stUV: TStaticText
-    Left = 528
-    Height = 16
-    Top = 464
-    Width = 9
-    AutoSize = True
-    Caption = '...'
+  object memoJoke: TMemo
+    Left = 16
+    Height = 121
+    Top = 48
+    Width = 592
+    ScrollBars = ssAutoBoth
     TabOrder = 27
-  end
-  object Label25: TLabel
-    Left = 416
-    Height = 15
-    Top = 488
-    Width = 44
-    Caption = 'Visibility'
-    ParentColor = False
-  end
-  object stVisibility: TStaticText
-    Left = 528
-    Height = 16
-    Top = 488
-    Width = 9
-    AutoSize = True
-    Caption = '...'
-    TabOrder = 28
-  end
-  object Label26: TLabel
-    Left = 416
-    Height = 15
-    Top = 516
-    Width = 31
-    Caption = 'Is Day'
-    ParentColor = False
-  end
-  object stIsDay: TStaticText
-    Left = 528
-    Height = 16
-    Top = 516
-    Width = 9
-    AutoSize = True
-    Caption = '...'
-    TabOrder = 29
   end
   object ImageList1: TImageList
     Height = 140
     Width = 140
-    Left = 56
-    Top = 336
+    Left = 504
+    Top = 680
     Bitmap = {
       4C7A080000008C0000008C00000042E001000000000078DAECDD0BDCA555593E
       7ED214D0343CA08C71124D0206184D037544506106480609420544190501318C
